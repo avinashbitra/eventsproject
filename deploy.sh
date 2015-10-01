@@ -1,0 +1,1 @@
+scp target/eventsproject.war 560d3a4489f5cf6ba200008a@tmct-av123.rhcloud.com:app-root/dependencies/jbossews/webapps/ROOT.war

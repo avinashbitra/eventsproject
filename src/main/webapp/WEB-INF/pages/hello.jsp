@@ -1,5 +1,5 @@
 <html>
 <body>
-	<h1>${message}</h1>
+	<div align="center">${message}</div>
 </body>
 </html>
