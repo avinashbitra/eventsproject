@@ -15,8 +15,12 @@
       <property name="searchSystemEnvironment" value="true"/>
     </bean>
 
-    <mongo:mongo host="${OPENSHIFT_MONGODB_DB_HOST}" port="${OPENSHIFT_MONGODB_DB_PORT}" />
-    <mongo:db-factory dbname="tmct" username="${OPENSHIFT_MONGODB_DB_USERNAME}" password="${OPENSHIFT_MONGODB_DB_PASSWORD}"/>
+    <mongo:mongo host="${OPENSHIFT_MONGODB_DB_HOST}" port="${OPENSHIFT_MONGODB_DB_PORT}"  />
+    <mongo:db-factory dbname="${OPENSHIFT_APP_NAME}"
+                      username="${OPENSHIFT_MONGODB_DB_USERNAME}"
+                      password="${OPENSHIFT_MONGODB_DB_PASSWORD}"
+                      port="${OPENSHIFT_MONGODB_DB_PORT}"
+                      host="${OPENSHIFT_MONGODB_DB_HOST}"/>
 
     <context:component-scan base-package="com.avinashbitra.events"/>
 
