@@ -16,18 +16,36 @@
   </bean>
 
 
-  <mongo:mongo host="localhost" port="27017"  />
+  <mongo:mongo host="localhost" port="27017"/>
   <mongo:db-factory dbname="local"/>
 
   <context:component-scan base-package="com.avinashbitra.events"/>
 
   <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-    <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+    <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
   </bean>
 
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix" value="/WEB-INF/pages/"/>
     <property name="suffix" value=".jsp"/>
+  </bean>
+
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtpout.secureserver.net"/>
+    <property name="port" value="25"/>
+    <property name="username" value="info@avinashbitra.com"/>
+    <property name="password" value="avidevi1"/>
+
+    <!-- The name of the property, following JavaBean naming conventions -->
+    <property name="javaMailProperties">
+      <props>
+        <prop key="mail.transport.protocol">smtp</prop>
+        <prop key="mail.smtp.host">smtpout.secureserver.net</prop>
+        <prop key="mail.smtp.auth">true</prop>
+        <prop key="mail.smtp.starttls.enable">true</prop>
+        <prop key="mail.debug">true</prop>
+      </props>
+    </property>
   </bean>
 
 </beans>

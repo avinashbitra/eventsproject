@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloController {
 
 	@Autowired
-	MongoTemplate template ;
+	private MongoTemplate template ;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {

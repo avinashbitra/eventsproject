@@ -9,28 +9,46 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-<bean id="propertyConfigurer"
-      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-  <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
-  <property name="searchSystemEnvironment" value="true"/>
-</bean>
+  <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+    <property name="searchSystemEnvironment" value="true"/>
+  </bean>
 
-<mongo:mongo host="${OPENSHIFT_MONGODB_DB_HOST}" port="${OPENSHIFT_MONGODB_DB_PORT}"  />
-<mongo:db-factory dbname="${OPENSHIFT_APP_NAME}"
-                  username="${OPENSHIFT_MONGODB_DB_USERNAME}"
-                  password="${OPENSHIFT_MONGODB_DB_PASSWORD}"
-                  port="${OPENSHIFT_MONGODB_DB_PORT}"
-                  host="${OPENSHIFT_MONGODB_DB_HOST}"/>
+  <mongo:mongo host="${OPENSHIFT_MONGODB_DB_HOST}" port="${OPENSHIFT_MONGODB_DB_PORT}"/>
+  <mongo:db-factory dbname="${OPENSHIFT_APP_NAME}"
+                    username="${OPENSHIFT_MONGODB_DB_USERNAME}"
+                    password="${OPENSHIFT_MONGODB_DB_PASSWORD}"
+                    port="${OPENSHIFT_MONGODB_DB_PORT}"
+                    host="${OPENSHIFT_MONGODB_DB_HOST}"/>
 
-<context:component-scan base-package="com.avinashbitra.events"/>
+  <context:component-scan base-package="com.avinashbitra.events"/>
 
-<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-  <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
-</bean>
+  <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+  </bean>
 
-<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  <property name="prefix" value="/WEB-INF/pages/"/>
-  <property name="suffix" value=".jsp"/>
-</bean>
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/pages/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>
+
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtpout.secureserver.net"/>
+    <property name="port" value="25"/>
+    <property name="username" value="info@avinashbitra.com"/>
+    <property name="password" value="avidevi1"/>
+
+    <!-- The name of the property, following JavaBean naming conventions -->
+    <property name="javaMailProperties">
+      <props>
+        <prop key="mail.transport.protocol">smtp</prop>
+        <prop key="mail.smtp.host">smtpout.secureserver.net</prop>
+        <prop key="mail.smtp.auth">true</prop>
+        <prop key="mail.smtp.starttls.enable">true</prop>
+        <prop key="mail.debug">true</prop>
+      </props>
+    </property>
+  </bean>
 
 </beans>

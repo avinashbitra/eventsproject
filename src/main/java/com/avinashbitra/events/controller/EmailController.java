@@ -1,18 +1,22 @@
 package com.avinashbitra.events.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.stereotype.Controller;
 
-/**
- * Created by abitra on 10/2/2015.
- */
+@Controller
 public class EmailController {
 
+  @Autowired
+  private MailSender crunchifymail;
 
-
-  @RequestMapping(value = "/email")
   public void sendEmail(){
-
+    SimpleMailMessage crunchifyMsg = new SimpleMailMessage();
+    crunchifyMsg.setFrom("info@avinashbitra.com");
+    crunchifyMsg.setTo("avibitra@gmail.com");
+    crunchifyMsg.setSubject("TEST");
+    crunchifyMsg.setText("Test Message");
+    crunchifymail.send(crunchifyMsg);
   }
-
-
 }
